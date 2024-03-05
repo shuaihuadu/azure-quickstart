@@ -36,9 +36,7 @@ public sealed class TestConfiguration
     public static KustoConfig Kusto => LoadSection<KustoConfig>();
     public static MongoDBConfig Mongo => LoadSection<MongoDBConfig>();
     public static MilvusConfig Milvus => LoadSection<MilvusConfig>();
-
-    public static AzureAISearchConfig AzureAISpeech => LoadSection<AzureAISearchConfig>();
-
+    public static AzureAISpeechConfig AzureAISpeech => LoadSection<AzureAISpeechConfig>();
     public static AzureAIComputerVisionConfig AzureAIComputerVision => LoadSection<AzureAIComputerVisionConfig>();
 
     private static T LoadSection<T>([CallerMemberName] string? caller = null)
@@ -194,12 +192,14 @@ public sealed class TestConfiguration
     {
         public string Endpoint { get; set; }
         public string ApiKey { set; get; }
+        public string Region { get; set; }
     }
 
     public class AzureAIComputerVisionConfig
     {
         public string Endpoint { get; set; }
         public string ApiKey { set; get; }
+        public string Region { get; set; }
     }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor.
