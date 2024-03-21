@@ -1,4 +1,9 @@
-﻿global using AzureAIServiceExamples.RepoUtils;
+﻿global using Azure;
+global using Azure.AI.Vision.ImageAnalysis;
+global using AzureAIServiceExamples.RepoUtils;
+global using AzureAIServiceExamples.Resources;
+global using Microsoft.CognitiveServices.Speech;
+global using Microsoft.CognitiveServices.Speech.Audio;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Logging;
 global using System.Runtime.CompilerServices;
