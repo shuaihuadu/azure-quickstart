@@ -6,5 +6,7 @@ global using Microsoft.CognitiveServices.Speech;
 global using Microsoft.CognitiveServices.Speech.Audio;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Logging;
+global using System.Net.Http.Headers;
 global using System.Runtime.CompilerServices;
+global using System.Text;
 global using Xunit.Abstractions;
