@@ -17,7 +17,7 @@ public abstract class BaseTest
     private static void LoadUserSecrets()
     {
         IConfigurationRoot configurationRoot = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.Development.json", true)
+            .AddJsonFile(@"D:\appsettings\test_configuration.json", true)
             .AddEnvironmentVariables()
             .AddUserSecrets<Env>()
             .Build();
