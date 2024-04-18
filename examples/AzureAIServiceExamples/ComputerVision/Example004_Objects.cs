@@ -7,7 +7,7 @@ public class Example004_Objects(ITestOutputHelper output) : BaseTest(output)
     {
         ImageAnalysisClient client = new(new Uri(TestConfiguration.AzureAIComputerVision.Endpoint), new AzureKeyCredential(TestConfiguration.AzureAIComputerVision.ApiKey));
 
-        using Stream? stream = EmbeddedResource.ReadStream("image-analysis-sample.jpg");
+        using Stream? stream = EmbeddedResource.ReadStream<Example004_Objects>("image-analysis-sample.jpg");
 
         ImageAnalysisResult result = await client.AnalyzeAsync(BinaryData.FromStream(stream!), VisualFeatures.Objects);
 

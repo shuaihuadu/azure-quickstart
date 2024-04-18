@@ -2,11 +2,11 @@
 
 public static class EmbeddedResource
 {
-    private static readonly string? resourceNamespace = typeof(EmbeddedResource).Namespace;
-
-    public static string Read(string fileName)
+    public static string Read<T>(string fileName) where T : class
     {
-        Assembly? assembly = typeof(EmbeddedResource).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
+        string? resourceNamespace = typeof(T).Namespace;
+
+        Assembly? assembly = typeof(T).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
 
         string resourceName = $"{resourceNamespace}.{fileName}";
 
@@ -17,19 +17,20 @@ public static class EmbeddedResource
         return reader.ReadToEnd();
     }
 
-
-    public static Stream? ReadStream(string fileName)
+    public static Stream? ReadStream<T>(string fileName) where T : class
     {
-        Assembly? assembly = typeof(EmbeddedResource).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
+        string? resourceNamespace = typeof(T).Namespace;
+
+        Assembly? assembly = typeof(T).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
 
         string resourceName = $"{resourceNamespace}.{fileName}";
 
         return assembly.GetManifestResourceStream(resourceName);
     }
 
-    public async static Task<ReadOnlyMemory<byte>> ReadAllAsync(string fileName)
+    public async static Task<ReadOnlyMemory<byte>> ReadAllAsync<T>(string fileName) where T : class
     {
-        await using Stream? resourceStream = ReadStream(fileName);
+        await using Stream? resourceStream = ReadStream<T>(fileName);
         using MemoryStream memoryStream = new();
 
         await resourceStream!.CopyToAsync(memoryStream);

@@ -20,6 +20,7 @@ public sealed class TestConfiguration
     public static AzureAISearchConfig AzureAISearch => LoadSection<AzureAISearchConfig>();
     public static AzureAISpeechConfig AzureAISpeech => LoadSection<AzureAISpeechConfig>();
     public static AzureAIComputerVisionConfig AzureAIComputerVision => LoadSection<AzureAIComputerVisionConfig>();
+    public static BingConfig Bing => LoadSection<BingConfig>();
 
     private static T LoadSection<T>([CallerMemberName] string? caller = null)
     {
@@ -65,6 +66,10 @@ public sealed class TestConfiguration
         public string Endpoint { get; set; }
         public string ApiKey { set; get; }
         public string Region { get; set; }
+    }
+    public class BingConfig
+    {
+        public string ApiKey { get; set; } = string.Empty;
     }
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor.

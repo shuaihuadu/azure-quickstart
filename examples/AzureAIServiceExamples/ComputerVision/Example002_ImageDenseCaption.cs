@@ -7,7 +7,7 @@ public class Example002_ImageDenseCaption(ITestOutputHelper output) : BaseTest(o
     {
         ImageAnalysisClient client = new(new Uri(TestConfiguration.AzureAIComputerVision.Endpoint), new AzureKeyCredential(TestConfiguration.AzureAIComputerVision.ApiKey));
 
-        using Stream? stream = EmbeddedResource.ReadStream("image-analysis-sample.jpg");
+        using Stream? stream = EmbeddedResource.ReadStream<Example002_ImageDenseCaption>("image-analysis-sample.jpg");
 
         ImageAnalysisResult result = await client.AnalyzeAsync(BinaryData.FromStream(stream!), VisualFeatures.DenseCaptions, new ImageAnalysisOptions
         {
