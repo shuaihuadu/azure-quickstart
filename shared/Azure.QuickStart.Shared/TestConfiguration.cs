@@ -1,4 +1,4 @@
-﻿namespace AzureAIServiceExamples;
+﻿namespace Azure.QuickStart.Shared;
 
 public sealed class TestConfiguration
 {

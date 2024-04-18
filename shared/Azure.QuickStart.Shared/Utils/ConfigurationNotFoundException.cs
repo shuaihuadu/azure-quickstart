@@ -1,4 +1,4 @@
-﻿namespace AzureAIServiceExamples.RepoUtils;
+﻿namespace Azure.QuickStart.Shared.Utils;
 
 public sealed class ConfigurationNotFoundException : Exception
 {

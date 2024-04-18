@@ -1,12 +1,10 @@
-﻿using System.Reflection;
+﻿namespace Azure.QuickStart.Shared.Resources;
 
-namespace AzureAIServiceExamples.Resources;
-
-internal static class EmbeddedResource
+public static class EmbeddedResource
 {
     private static readonly string? resourceNamespace = typeof(EmbeddedResource).Namespace;
 
-    internal static string Read(string fileName)
+    public static string Read(string fileName)
     {
         Assembly? assembly = typeof(EmbeddedResource).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
 
@@ -20,7 +18,7 @@ internal static class EmbeddedResource
     }
 
 
-    internal static Stream? ReadStream(string fileName)
+    public static Stream? ReadStream(string fileName)
     {
         Assembly? assembly = typeof(EmbeddedResource).GetTypeInfo().Assembly ?? throw new ConfigurationException($"[{resourceNamespace}] {fileName} assembly not found");
 
@@ -29,7 +27,7 @@ internal static class EmbeddedResource
         return assembly.GetManifestResourceStream(resourceName);
     }
 
-    internal async static Task<ReadOnlyMemory<byte>> ReadAllAsync(string fileName)
+    public async static Task<ReadOnlyMemory<byte>> ReadAllAsync(string fileName)
     {
         await using Stream? resourceStream = ReadStream(fileName);
         using MemoryStream memoryStream = new();

@@ -1,4 +1,4 @@
-﻿namespace AzureAIServiceExamples;
+﻿namespace Azure.QuickStart.Shared;
 
 public abstract class BaseTest
 {
@@ -18,8 +18,6 @@ public abstract class BaseTest
     {
         IConfigurationRoot configurationRoot = new ConfigurationBuilder()
             .AddJsonFile(@"D:\appsettings\test_configuration.json", true)
-            .AddEnvironmentVariables()
-            .AddUserSecrets<Env>()
             .Build();
 
         TestConfiguration.Initialize(configurationRoot);

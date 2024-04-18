@@ -1,4 +1,4 @@
-﻿namespace AzureAIServiceExamples.RepoUtils;
+﻿namespace Azure.QuickStart.Shared.Utils;
 
 internal sealed class XunitLogger : ILoggerFactory, ILogger, IDisposable
 {

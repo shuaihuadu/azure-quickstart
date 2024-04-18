@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureAIServiceExamples", "AzureAIServiceExamples\AzureAIServiceExamples.csproj", "{9CC91F80-3209-4DBF-8998-236637D00A20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzureAIServiceExamples", "AzureAIServiceExamples\AzureAIServiceExamples.csproj", "{9CC91F80-3209-4DBF-8998-236637D00A20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure.QuickStart.Shared", "shared\Azure.QuickStart.Shared\Azure.QuickStart.Shared.csproj", "{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{7FF0F7A4-5827-4084-8538-BECAB4C45516}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{9CC91F80-3209-4DBF-8998-236637D00A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CC91F80-3209-4DBF-8998-236637D00A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CC91F80-3209-4DBF-8998-236637D00A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F45A54B8-80B9-4EE2-BF9C-2C7E4EF82BC6} = {7FF0F7A4-5827-4084-8538-BECAB4C45516}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A354C7DC-4419-47A3-A1ED-B3C850072D97}
