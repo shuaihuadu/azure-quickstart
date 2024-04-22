@@ -21,6 +21,7 @@ public sealed class TestConfiguration
     public static AzureAISpeechConfig AzureAISpeech => LoadSection<AzureAISpeechConfig>();
     public static AzureAIComputerVisionConfig AzureAIComputerVision => LoadSection<AzureAIComputerVisionConfig>();
     public static BingConfig Bing => LoadSection<BingConfig>();
+    public static AzureBlobConfig AzureBlob => LoadSection<AzureBlobConfig>();
 
     private static T LoadSection<T>([CallerMemberName] string? caller = null)
     {
@@ -67,6 +68,12 @@ public sealed class TestConfiguration
         public string ApiKey { set; get; }
         public string Region { get; set; }
     }
+
+    public class AzureBlobConfig
+    {
+        public string ConnectionString { get; set; }
+    }
+
     public class BingConfig
     {
         public string ApiKey { get; set; } = string.Empty;

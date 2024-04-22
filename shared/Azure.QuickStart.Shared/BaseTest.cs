@@ -32,4 +32,6 @@ public abstract class BaseTest
     {
         this.Output.WriteLine(target != null ? target.ToString() : string.Empty);
     }
+
+    protected string FileBaseDirectory => Path.Combine(AppContext.BaseDirectory, "Files");
 }
