@@ -1,7 +1,3 @@
-using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
-using Azure.Storage.Sas;
-
 namespace AzureStorageExamples;
 
 public class Example001_BlobStorageTest(ITestOutputHelper output) : BaseTest(output)
@@ -68,7 +64,15 @@ public class Example001_BlobStorageTest(ITestOutputHelper output) : BaseTest(out
 
             BlobClient blobClient = container.GetBlobClient(fileName);
 
-            WriteLine(blobClient.Uri.AbsoluteUri);
+            Response<BlobDownloadStreamingResult> response = await blobClient.DownloadStreamingAsync();
+
+            using MemoryStream memoryStream = new();
+
+            response.Value.Content.CopyTo(memoryStream);
+
+            byte[] byteArray = memoryStream.ToArray();
+
+            await File.WriteAllBytesAsync("2.jpg", byteArray);
         }
         catch (RequestFailedException ex)
         {
@@ -78,7 +82,7 @@ public class Example001_BlobStorageTest(ITestOutputHelper output) : BaseTest(out
     }
 
     [Fact]
-    public async Task GetBlobUriWithSasAsyncTest()
+    public async Task DeleteBlobAsyncTest()
     {
         BlobServiceClient blobServiceClient = new(TestConfiguration.AzureBlob.ConnectionString);
 
@@ -90,7 +94,32 @@ public class Example001_BlobStorageTest(ITestOutputHelper output) : BaseTest(out
 
             BlobClient blobClient = container.GetBlobClient(fileName);
 
-            Uri? uriWithSas = await this.CreateBlobSasAsync(blobClient);
+            await blobClient.DeleteAsync();
+        }
+        catch (RequestFailedException ex)
+        {
+            if ((ex.Status != (int)HttpStatusCode.NotFound))
+            {
+                WriteLine($"HTTP error code {ex.Status}:{ex.ErrorCode}");
+                WriteLine(ex.Message);
+            }
+        }
+    }
+
+    [Fact]
+    public void GetBlobUriWithSasAsyncTest()
+    {
+        BlobServiceClient blobServiceClient = new(TestConfiguration.AzureBlob.ConnectionString);
+
+        try
+        {
+            string fileName = "1.jpg";
+
+            BlobContainerClient container = blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            BlobClient blobClient = container.GetBlobClient(fileName);
+
+            Uri? uriWithSas = this.CreateBlobSasAsync(blobClient);
 
             if (uriWithSas is not null)
             {
@@ -104,7 +133,7 @@ public class Example001_BlobStorageTest(ITestOutputHelper output) : BaseTest(out
         }
     }
 
-    private async Task<Uri?> CreateBlobSasAsync(BlobClient blobClient)
+    private Uri? CreateBlobSasAsync(BlobClient blobClient)
     {
         if (blobClient.CanGenerateSasUri)
         {
