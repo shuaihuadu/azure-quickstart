@@ -18,14 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.AI.Vision.ImageAnalysis" Version="1.0.0-beta.2" />
+    <PackageReference Include="Azure.AI.Translation.Document" Version="2.0.0-beta.2" />
+    <PackageReference Include="Azure.AI.Translation.Text" Version="1.0.0" />
+    <PackageReference Include="Azure.AI.Vision.ImageAnalysis" Version="1.0.0-beta.3" />
     <PackageReference Include="coverlet.collector" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="System.Numerics.Tensors" Version="8.0.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.8">
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -41,6 +43,9 @@
 
   <ItemGroup>
     <None Update="speech-service\files\A-1-audio.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Documents\paper.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

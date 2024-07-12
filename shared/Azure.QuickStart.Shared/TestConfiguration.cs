@@ -22,6 +22,7 @@ public sealed class TestConfiguration
     public static AzureAIComputerVisionConfig AzureAIComputerVision => LoadSection<AzureAIComputerVisionConfig>();
     public static BingConfig Bing => LoadSection<BingConfig>();
     public static AzureBlobConfig AzureBlob => LoadSection<AzureBlobConfig>();
+    public static AzureAITranslatorConfig AzureAITranslator => LoadSection<AzureAITranslatorConfig>();
 
     private static T LoadSection<T>([CallerMemberName] string? caller = null)
     {
@@ -72,6 +73,15 @@ public sealed class TestConfiguration
     public class AzureBlobConfig
     {
         public string ConnectionString { get; set; }
+    }
+
+    public class AzureAITranslatorConfig
+    {
+        public string TranslatorEndpoint { get; set; }
+        public string DocumentTranslatorEndpoint { get; set; }
+        public string ApiKey { get; set; }
+        public string SourceContainerUrl { get; set; }
+        public string TargetContainerUrl { get; set; }
     }
 
     public class BingConfig
