@@ -1,10 +1,11 @@
 ﻿using Azure.AI.Translation.Document;
+using Azure.AI.Translation.Text;
 
 namespace AzureAIServiceExamples.Translator;
 
 /// <summary>
 /// 使用Azure AI 翻译文档
-/// https://learn.microsoft.com/zh-cn/azure/ai-services/translator/document-translation/reference/rest-api-guide
+/// https://learn.microsoft.com/zh-cn/azure/ai-services/translator/
 /// 注意事项：
 /// 1.创建Azure AI Translator，免费版的不支持文档翻译
 /// 2.需要创建翻译文档的blob container，并生成SAS，设置对应的SAS权限
@@ -15,29 +16,26 @@ namespace AzureAIServiceExamples.Translator;
 public class Example001_TextTranslation(ITestOutputHelper output) : BaseTest(output)
 {
     [Fact]
-    public async Task RunSingleDocumentTranslationAsync()
+    public async Task RunTextTranslationAsync()
     {
-        SingleDocumentTranslationClient client = new(new Uri(TestConfiguration.AzureAITranslator.DocumentTranslatorEndpoint), new AzureKeyCredential(TestConfiguration.AzureAITranslator.ApiKey));
+        AzureKeyCredential credential = new(TestConfiguration.AzureAITranslator.ApiKey);
 
-        const string fileName = "paper.pdf";
+        TextTranslationClient client = new(credential, "eastus");
 
-        string document = Path.Join(AppContext.BaseDirectory, "Documents", fileName);
+        const string sourceLanguage = "zh";
+        const string targetLanguage = "en";
 
-        await using Stream stream = File.OpenRead(document);
+        string inputText = "你吃饭了么？";
 
-        MultipartFormFileData sourceDocument = new(Path.GetFileName(fileName), stream, "application/octet-stream");
+        Response<IReadOnlyList<TranslatedTextItem>> response = await client.TranslateAsync(targetLanguage, inputText, sourceLanguage);
 
-        DocumentTranslateContent content = new(sourceDocument);
+        IReadOnlyList<TranslatedTextItem> translatedTextItems = response.Value;
 
-        Response<BinaryData> response = await client.DocumentTranslateAsync("zh", content);
+        Assert.NotNull(translatedTextItems);
 
-        Assert.NotNull(response.Value);
+        TranslatedTextItem translatedTextItem = translatedTextItems.FirstOrDefault()!;
 
-        byte[] byteArray = response.Value.ToArray();
-
-        const string outputFile = "paper-译文.pdf";
-
-        await File.WriteAllBytesAsync(outputFile, byteArray);
+        this.WriteLine(translatedTextItem.Translations.FirstOrDefault()!.Text);
     }
 
     [Fact]
