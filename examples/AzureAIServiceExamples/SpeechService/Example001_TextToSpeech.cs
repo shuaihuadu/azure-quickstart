@@ -1,3 +1,6 @@
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+
 namespace AzureAIServiceExamples.SpeechService;
 
 public class Example001_TextToSpeech(ITestOutputHelper output) : BaseTest(output)
